@@ -9,8 +9,8 @@ COPY . /app
 
 # Check if maven is installed and install it if necessary
 RUN mvn --version || { \
-    apt-get update && \
-    apt-get install -y maven && \
+    apk update && \
+    apk add maven && \
     mvn --version; \
 }
 
