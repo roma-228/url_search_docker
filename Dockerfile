@@ -1,5 +1,5 @@
-# Use JDK 16 base image for ARM processors
-FROM openjdk:16-jdk-alpine
+
+FROM maven:3.8.3-openjdk-16
 
 # Set the working directory
 WORKDIR /app
@@ -8,19 +8,12 @@ WORKDIR /app
 COPY . /app
 
 # Check if maven is installed and install it if necessary
-RUN mvn --version || { \
-    apk update && \
-    apk add maven && \
-    mvn --version; \
-}
+
 
 # Build the application using Maven
-RUN mvn compile && \
-    mvn package
+RUN mvn package
 
-# Set the entry point to the Java executable
-ENTRYPOINT ["java"]
 
 # Run the application using the jar file built by Maven
-CMD ["-jar", "target/url-shortener-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/url-shortener-0.0.1-SNAPSHOT.jar"]
 
