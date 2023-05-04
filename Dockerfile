@@ -11,7 +11,7 @@ COPY . /app
 
 
 # Build the application using Maven
-RUN mvn package
+RUN mvn package -X
 
 
 # Run the application using the jar file built by Maven
